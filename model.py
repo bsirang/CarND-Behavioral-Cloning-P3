@@ -15,6 +15,10 @@ from sklearn.model_selection import train_test_split
 
 def input_batch_generator(samples, datadir, batch_size):
     num_samples = len(samples)
+    # We append an augmented (flipped) image for every input
+    # We'll cut the batch size in half here so that the effective batch size
+    # remains the same
+    batch_size = int(batch_size / 2)
     while 1: # Loop forever so the generator never terminates
         shuffle(samples)
         for offset in range(0, num_samples, batch_size):
@@ -28,6 +32,10 @@ def input_batch_generator(samples, datadir, batch_size):
                 center_angle = float(batch_sample[3])
                 images.append(center_image)
                 angles.append(center_angle)
+                center_flipped = np.fliplr(center_image)
+                center_angle_flipped = -center_angle
+                images.append(center_flipped)
+                angles.append(center_angle_flipped)
 
             # trim image to only see section with road
             X_train = np.array(images)
