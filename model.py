@@ -85,7 +85,7 @@ def define_training_and_validation_data(model, datadir, batch_size, epochs=5):
     
 print("Hello")
 
-model, history_object = define_training_and_validation_data(create_nvidia_e2e_model(), '/opt/carnd_p3/data', 32)
+model, history_object = define_training_and_validation_data(create_nvidia_e2e_model(), '/home/workspace/CarND-Behavioral-Cloning-P3/training/data', 32)
 model.save('model.h5')
 
 
